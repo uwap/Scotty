@@ -1,0 +1,35 @@
+html .row {
+  max-width: 100%;
+}
+
+div.clock {
+  max-width: 8em;
+  margin: 20px;
+  font-size: 200%;
+}
+
+div.top-bar-title {
+  float: left;
+  margin-right: 1em;
+}
+
+@keyframes mpdanimation {
+  0%   { transform: rotate(-45deg); }
+  25%  { transform: rotate(  0deg); }
+  50%  { transform: rotate( 45deg); }
+  75%  { transform: rotate(  0deg); }
+  100% { transform: rotate(-45deg); }
+}
+div.top-bar-right .mpd {
+  margin-right: 1em;
+}
+div.top-bar-right .mpd-icon {
+  font-size: .75em;
+  color: #def0fc;
+  text-shadow: 1px 1px 2px #000;
+  margin-right: .5ex;
+  animation-name: mpdanimation;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}

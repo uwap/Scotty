@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scotty - Maschinendeck Status Mitteiler</title>
+    <link rel="stylesheet" href="css/foundation.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="top-bar-title">Maschinendeck e.V.</div>
+      <div>
+        <div class="top-bar-left">Scotty</div>
+        <div class="top-bar-right">
+          <span class="mpd-icon badge">♫</span>
+          <span class="mpd">Keine Musik</span>
+          <span class="secondary label">Undefined</span>
+          <span class="success label hide">Open</span>
+          <span class="alert label hide">Closed</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-3 small-6 columns">
+        <div class="clock callout primary text-center">
+          <span class="hour">00</span>
+          <span class="timeseperator">:</span>
+          <span class="minute">00</span>
+          <span class="timeseperator">:</span>
+          <span class="second">00</span> 
+        </div>
+      </div>
+      <div class="large-3 small-6 columns">
+        <h2>Trier Hbf</h2>
+        <ul class="db">
+          <li>
+            <span class="secondary label">RE20842</span>
+            <span style="font-weight: bold;">Koblenz Hbf</span>
+            <span>18:39</span>
+            <span>via</span>
+            <span>Wittlich Hbf - Treis Karden</span>
+          </li>
+        </ul>
+      </div>
+      <div class="small-6 columns">
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-8 columns">
+        <h2>Freifunk Trier</h2>
+        <img src="http://munin.draco.fftr/munin-cgi/munin-cgi-graph/localhost.localdomain/Aggregates/traffic_eth0_down-week.png" />
+        <img src="http://munin.draco.fftr/munin-cgi/munin-cgi-graph/localhost.localdomain/Aggregates/traffic_eth0_up-week.png" />
+        <img src="http://munin.draco.fftr/munin-cgi/munin-cgi-graph/localhost.localdomain/Aggregates/traffic_icvpn_down-week.png" />
+        <img src="http://munin.draco.fftr/munin-cgi/munin-cgi-graph/localhost.localdomain/Aggregates/traffic_icvpn_up-week.png" />
+      </div>
+    </div>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/what-input.min.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
