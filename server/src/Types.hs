@@ -7,9 +7,12 @@ import qualified Data.ByteString as B
 import qualified Data.Text as T
 
 data ScottyConfig = ScottyConfig
-                  { scottyAddress :: String
-                  , scottyPort    :: Int
-                  , spaceApiURL   :: B.ByteString
+                  { scottyAddress  :: String
+                  , scottyPort     :: Int
+                  , spaceApiURL    :: B.ByteString
+                  , komzentAddress :: String
+                  , komzentPort    :: Int
+                  , komzentPath    :: FilePath
                   }
 
 data RoomStatus = RoomOpen | RoomClosed | Unknown
@@ -34,3 +37,23 @@ instance ToJSON RoomStatus where
   toJSON RoomOpen   = object ["room" .= object [ "state" .= T.pack "open" ]]
   toJSON RoomClosed = object ["room" .= object [ "state" .= T.pack "closed" ]]
   toJSON Unknown    = object ["room" .= object [ "state" .= T.pack "unknown"]]
+
+
+
+data MPDStatus = Song T.Text
+              deriving (Show)
+
+instance FromJSON MPDStatus where
+  parseJSON (Object v) = do
+    state    <- v .: "state"
+    metadata <- v .: "metadata"
+    mtype    <- metadata .: "type"
+    switch   <- v .: "switch"
+    case (mtype, switch) of
+      (String "music", String "mpd") -> Song <$> state .: "song"
+      _                              -> fail "Not an MPD Status"
+  parseJSON _ = fail "Not an MPD Status"
+
+instance ToJSON MPDStatus where
+  toJSON (Song x) = object ["mpd" .= object [ "song" .= x ]]
+  -- { metadata: { type: music }, state: "SONGNAME" }
