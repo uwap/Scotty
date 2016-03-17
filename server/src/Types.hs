@@ -2,6 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Types where
 
+import Control.Lens hiding ((.=))
 import Data.Aeson
 import qualified Data.ByteString as B
 import qualified Data.Text as T
@@ -13,7 +14,7 @@ data ScottyConfig = ScottyConfig
                   , komzentAddress :: String
                   , komzentPort    :: Int
                   , komzentPath    :: FilePath
-                  }
+                  } deriving (Show)
 
 data RoomStatus = RoomOpen | RoomClosed | Unknown
               deriving (Show)
@@ -56,4 +57,11 @@ instance FromJSON MPDStatus where
 
 instance ToJSON MPDStatus where
   toJSON (Song x) = object ["mpd" .= object [ "song" .= x ]]
-  -- { metadata: { type: music }, state: "SONGNAME" }
+
+
+
+data ScottyState = ScottyState
+                  { _room :: RoomStatus
+                  , _mpd  :: MPDStatus
+                  } deriving (Show)
+makeLenses ''ScottyState
