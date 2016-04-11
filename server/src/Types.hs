@@ -5,6 +5,7 @@ module Types where
 import Control.Lens hiding ((.=))
 import qualified Data.ByteString as B
 import qualified Data.Text as T
+import Network.WebSockets
 
 {-| The Config Type initialized in Config.hs -}
 data ScottyConfig = ScottyConfig
@@ -28,8 +29,12 @@ data RoomStatus = RoomOpen | RoomClosed | Unknown
 data MPDStatus = Song T.Text
               deriving (Show)
 
+{-| All Data to be stored about one Client -}
+data Client = Client Connection
+
 data ScottyState = ScottyState
-                  { _room :: RoomStatus
-                  , _mpd  :: MPDStatus
-                  } deriving (Show)
+                  { _room    :: RoomStatus
+                  , _mpd     :: MPDStatus
+                  , _clients :: [Client]
+                  }
 makeLenses ''ScottyState
