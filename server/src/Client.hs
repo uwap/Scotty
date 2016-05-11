@@ -2,8 +2,6 @@
 module Client where
 
 import Types
-import KommandoZentrale ()
-import RoomStatus ()
 import Control.Lens
 import Control.Monad
 import Control.Exception

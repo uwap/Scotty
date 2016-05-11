@@ -10,30 +10,6 @@ import Control.Concurrent
 import Control.Lens hiding ((.=))
 import Network.WebSockets
 
-{-| Decodes the JSON from the KommandoZentrale and extracts the song name infos.
- 
-    Note: Because we only need to deserialize from the KommandoZentrale and serialize for
-    the scotty client, we don't hold the law `x = decode (encode x)` resp. `x = encode (decode x)`
- -}
-instance FromJSON MPDStatus where
-  parseJSON (Object v) = do
-    state    <- v .: "state"
-    metadata <- v .: "metadata"
-    mtype    <- metadata .: "type"
-    switch   <- v .: "switch"
-    case (mtype, switch) of
-      (String "music", String "mpd") -> Song <$> state .: "song"
-      _                              -> fail "Not an MPD Status"
-  parseJSON _ = fail "Not an MPD Status"
-
-{-| Encodes the JSON for the Scotty Client.
- 
-    Note: Because we only need to deserialize from the KommandoZentrale and serialize for
-    the scotty client, we don't hold the law `x = decode (encode x)` resp. `x = encode (decode x)`
- -}
-instance ToJSON MPDStatus where
-  toJSON (Song x) = object ["mpd" .= object [ "song" .= x ]]
-
 {-| This thread updates the State whenever the
     KommandoZentrale pushes new JSON Data.
  -}
